@@ -1,24 +1,32 @@
-# README
+# キッチンカーコミュ
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+### サイトテーマ
+好きなキッチンカーを紹介したり、どこにどんなキッチンカーが出店しているか検索できるコミュニティサイト
+​
+### テーマを選んだ理由
+キッチンカーに興味があり、開業について少し調べたことがあるのですが、その中でお客さんに見つけてもらいづらいという側面があるなあと感じていました。  
+お客さん側が良いなと思ったキッチンカーを紹介したり、お店側が自分たちの活動を紹介したりできる場所があれば便利ではないかと考えこのテーマにしました。
+​
+### ターゲットユーザー
+- 近くで飲食店を探していて、いつもと違う食事をしたい人
+- 好きなキッチンカーを誰かに紹介したい人
+- キッチンカーを経営していて宣伝をしたい人
+​
+### 主な利用シーン
+- 近くの飲食店を検索したい時
+- 好きなキッチンカーを紹介する時
+- ​自分が経営するキッチンカーを宣伝したい時
 
-Things you may want to cover:
+## 設計書
+後ほど作成予定
+​
+## 開発環境
+- OS：Windows
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Visual Studio Code（VSCode）
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 使用素材
+​
