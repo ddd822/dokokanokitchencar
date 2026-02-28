@@ -1,2 +1,17 @@
-<h1>Homes#top</h1>
-<p>Find me in app/views/homes/top.html.erb</p>
+<div class="container">
+  <div class="row">
+    <h1><strong>どこかのキッチンカー</strong></h1>
+  </div>
+  <div class="row">
+    <%= link_to "一般会員新規登録", new_customer_registration_path %>
+  </div>
+  <div class="row">
+    <%= link_to "一般会員ログイン", new_customer_session_path %>
+  </div>
+  <div class="row">
+    <%= link_to "店舗会員新規登録", new_shop_registration_path %>
+  </div>
+  <div class="row">
+    <%= link_to "店舗会員ログイン", new_shop_session_path %>
+  </div>  
+</div>
