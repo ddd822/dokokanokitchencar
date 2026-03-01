@@ -44,9 +44,8 @@
     <% end %>
   </header>
   <div class="container">
-    <% flash.each do |message_type, message| %>
-      <div class="flash-message <%= message_type %>"><%= message %></div>
-    <% end %>
+    <%= notice %>
+    <%= alert %>  
     <%= yield %>
   </div>
   </body>
