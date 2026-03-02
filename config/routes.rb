@@ -1,4 +1,4 @@
-Rails.application.routes.draw do
+Rails.application.routes.draw do  
   devise_for :shops, path: 'shops', controllers: {
   sessions: 'public/shops/sessions',
   registrations: 'public/shops/registrations'
@@ -8,6 +8,13 @@ devise_for :customers, path: 'customers', controllers: {
   sessions: 'public/customers/sessions',
   registrations: 'public/customers/registrations'
 }
+  
+  namespace :public do
+    resources :posts
+    resources :shops
+    resources :customers
+  end
+
   get '/about', to: 'homes#about'
   root to: "homes#top"
   
