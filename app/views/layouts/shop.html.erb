@@ -12,35 +12,10 @@
 
   <body>
   <header>
-    <% if shop_signed_in? %>
-      <li>
-        <%= link_to "HOME", root_path %>
-      </li>
-      <li>
-        <%= link_to "ABOUT", about_path %>
-      </li>
-      <li>
-        <%= link_to "ログアウト", destroy_shop_session_path, method: :delete %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "HOME", root_path %>
-      </li>
-      <li>
-        <%= link_to "ABOUT", about_path %>
-      </li>
-      <li>
-        <%= link_to "店舗会員新規登録", new_shop_registration_path %>
-      </li>
-      <li>
-        <%= link_to "店舗会員ログイン", new_shop_session_path %>
-      </li>
-    <% end %>
+    <%= render 'layouts/shop_navigation' %>
   </header>
   <div class="container">
-    <% flash.each do |message_type, message| %>
-      <div class="flash-message <%= message_type %>"><%= message %></div>
-    <% end %>
+    <%= render 'layouts/flash_messages' %>
     <%= yield %>
   </div>
   </body>

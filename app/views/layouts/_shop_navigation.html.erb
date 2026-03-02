@@ -1,0 +1,30 @@
+<% if shop_signed_in? %>
+      <li>
+        <%= link_to "HOME", root_path %>
+      </li>
+      <li>
+        <%= link_to "ABOUT", about_path %>
+      </li>
+      <li>
+        <%= link_to "店舗会員ログアウト", destroy_shop_session_path, method: :delete %>
+      </li>
+    <% else %>
+      <li>
+        <%= link_to "HOME", root_path %>
+      </li>
+      <li>
+        <%= link_to "ABOUT", about_path %>
+      </li>
+      <li>
+        <%= link_to "一般会員新規登録", new_customer_registration_path %>
+      </li>
+      <li>
+        <%= link_to "一般会員ログイン", new_customer_session_path %>
+      </li>
+      <li>
+        <%= link_to "店舗会員新規登録", new_shop_registration_path %>
+      </li>
+      <li>
+        <%= link_to "店舗会員ログイン", new_shop_session_path %>
+      </li>
+    <% end %>
