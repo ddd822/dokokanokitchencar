@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_03_02_120628) do
+ActiveRecord::Schema.define(version: 2026_03_05_104249) do
 
   create_table "customers", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -29,6 +29,9 @@ ActiveRecord::Schema.define(version: 2026_03_02_120628) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "title"
     t.text "body"
+    t.string "postable_type", null: false
+    t.integer "postable_id", null: false
+    t.index ["postable_type", "postable_id"], name: "index_posts_on_postable"
   end
 
   create_table "shops", force: :cascade do |t|
