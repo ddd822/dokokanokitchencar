@@ -29,6 +29,7 @@ class Public::PostsController < ApplicationController
   end
 
   def show
+    @post = Post.find(params[:id])
   end
 
   def edit
@@ -38,4 +39,5 @@ class Public::PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :body)
+  end
 end

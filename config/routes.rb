@@ -9,7 +9,7 @@ devise_for :customers, path: 'customers', controllers: {
   registrations: 'public/customers/registrations'
 }
   
-  namespace :public do
+  scope module: :public do
     resources :posts
     resources :shops
     resources :customers
