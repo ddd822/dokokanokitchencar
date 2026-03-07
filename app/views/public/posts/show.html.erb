@@ -1,2 +1,14 @@
-<h1>Public::Posts#show</h1>
-<p>Find me in app/views/public/posts/show.html.erb</p>
+<div class="container">
+  <h1><%= @post.title %></h1>
+
+  <p><%= simple_format(@post.body) %></p>
+
+  <p>投稿日: <%= @post.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+
+  <% if @post.postable == current_shop || @post.postable == current_customer %>
+    <%= link_to '編集', edit_post_path(@post), class: "btn btn-sm btn-success" %> |
+    <%= link_to '削除', post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-sm btn-danger"  %>
+  <% end %>
+
+  <%= link_to '投稿一覧へ戻る', posts_path %>
+</div>

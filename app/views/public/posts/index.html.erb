@@ -6,7 +6,7 @@
         <h3>
           <%= link_to post.title, post_path(post) %>
         </h3>
-        <p><%= truncate(post.content, length: 100) %></p>                
+        <p><%= truncate(post.body, length: 100) %></p>                
         <small>投稿日: <%= post.created_at.strftime("%Y/%m/%d %H:%M") %></small>
       </li>
       <hr>
