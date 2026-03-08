@@ -1,22 +1,22 @@
 <div class="container">
   <div class="row">
-    <h2 class="mt-3">新規投稿</h2>
-  </div>
-    <div class="row">
+    <div class="mt-3">
+      <h2>新規投稿</h2>
       <%= form_with model: @post do |f| %>
-      
-      <div class="md-3">      
-        <%= f.label :title, class: 'form-label' %>
-        <%= f.text_field :title, class: 'form-control' %>
-    </div>
-    <div class="md-3">      
-      <%= f.label :body, class: 'form-label' %>
-      <%= f.text_area :body, class: 'form-control', rows: 5  %>
-    </div>
-    <div class="md-3">
-      <%= f.submit '投稿する', class: 'btn btn-success' %>
-      </div>
-      <% end %>    
-  </div>
+        <%= render 'layouts/error_messages', model: f.object, resource: @post %>
+        <div class="md-3">      
+          <%= f.label :タイトル, class: 'form-label' %>
+          <%= f.text_field :title, class: 'form-control' %>
+        </div>
+        <div class="md-3">      
+          <%= f.label :本文, class: 'form-label' %>
+          <%= f.text_area :body, class: 'form-control', rows: 5  %>
+        </div>
+        <div class="md-3">
+          <%= f.submit '投稿する', class: 'btn btn-success' %>
+        </div>
+      <% end %>   
   <%= link_to '投稿一覧へ戻る', posts_path %>
+    </div>
+  </div>
 </div>

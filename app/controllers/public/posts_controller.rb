@@ -1,4 +1,5 @@
 class Public::PostsController < ApplicationController
+  before_action :authenticate_user!,  only: [:edit, :update, :destroy]
   before_action :authenticate_shop!, only: [:create], if: -> { shop_signed_in? }
   before_action :authenticate_customer!, only: [:create], if: -> { customer_signed_in? }
   before_action :set_post, only: [:show, :edit, :update, :destroy]
@@ -59,9 +60,25 @@ class Public::PostsController < ApplicationController
     redirect_to posts_path, alert: "投稿が見つかりません。"
   end
 
+  def current_postable
+    if shop_signed_in?
+      current_shop
+    elsif customer_signed_in?
+      current_customer
+    else
+      nil
+    end
+  end
+
   def authorize_post!
     unless @post.postable == current_postable
       redirect_to posts_path, alert: "編集・削除の権限がありません。"
+    end
+  end
+
+  def authenticate_user!
+    unless shop_signed_in? || customer_signed_in?
+      redirect_to root_path, alert: "ログインしてください。"
     end
   end
 
