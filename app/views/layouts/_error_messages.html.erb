@@ -1,7 +1,7 @@
-<% if resource.errors.any? %>
+<% if model.errors.any? %>
   <div data-turbo-cache="false">
     <ul class="alert alert-warning">
-      <% resource.errors.full_messages.each do |message| %>
+      <% model.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
     </ul>

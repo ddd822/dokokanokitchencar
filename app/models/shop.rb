@@ -4,4 +4,5 @@ class Shop < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 has_many :posts, as: :postable
+validates :name, presence: true
 end
