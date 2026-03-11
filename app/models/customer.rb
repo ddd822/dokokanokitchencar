@@ -5,5 +5,6 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
 has_many :posts, as: :postable
-validates :name, presence: true
+validates :name, presence: true, length: { maximum: 50 }
+
 end

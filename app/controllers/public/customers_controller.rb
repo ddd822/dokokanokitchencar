@@ -12,7 +12,7 @@ class Public::CustomersController < ApplicationController
 
   def update
     if @customer.update(customer_params)
-      redirect_to @customer, notice: "プロフィールを更新しました。"
+      redirect_to @customer, notice: "ユーザープロフィールを更新しました。"
     else
       render :edit
     end
@@ -21,7 +21,12 @@ class Public::CustomersController < ApplicationController
   private
 
   def customer_params
-    params.require(:customer).permit(:name, :email, :password, :password_confirmation)
+    permitted = [:name, :email]
+    # パスワードが空の場合は除外し、入力があれば許可する
+    if params[:customer][:password].present?
+      permitted += [:password, :password_confirmation]
+    end
+    params.require(:customer).permit(permitted)
   end
 
   def set_customer

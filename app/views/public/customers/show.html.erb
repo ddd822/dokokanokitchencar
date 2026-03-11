@@ -1,15 +1,33 @@
-<div class='col-md-8 offset-md-1'>
-<h2>あなたの投稿一覧</h2>
-<% if @posts.any? %>
-  <ul>
-    <% @posts.each do |post| %>
-      <li>
-        <%= link_to post.title, post_path(post) %> 
-        <small>(投稿日: <%= post.created_at.strftime("%Y/%m/%d") %>)</small>
-      </li>
+<div class="row">
+  <div class='col-md-5 offset-md-1'>
+    <h2>プロフィール</h2>
+      <table class='table'>
+      <tr>
+        <th>ユーザーネーム</th>
+        <th><%= @customer.name %></th>
+      </tr>
+      <tr>
+	      <th>メールアドレス</th>
+	      <th><%= @customer.email %></th>
+      </tr>
+    </table>
+    <% if customer_signed_in? && @customer == current_customer %>
+      <%= link_to 'プロフィールを編集する', edit_customer_path(@customer), class: "btn btn-sm btn-success" %>
     <% end %>
-  </ul>
-<% else %>
-  <p>まだ投稿がありません。</p>
-<% end %>
+  </div>
+  <div class='col-md-5 offset-md-1'>  
+    <h2>あなたの投稿一覧</h2>
+    <% if @posts.any? %>
+      <ul>
+        <% @posts.each do |post| %>
+          <li>
+            <%= link_to post.title, post_path(post) %> 
+            <small>(投稿日: <%= post.created_at.strftime("%Y/%m/%d") %>)</small>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>まだ投稿がありません。</p>
+    <% end %>
+  </div>
 </div>

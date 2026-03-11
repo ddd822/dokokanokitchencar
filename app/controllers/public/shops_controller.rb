@@ -12,7 +12,7 @@ class Public::ShopsController < ApplicationController
 
   def update
     if @shop.update(shop_params)
-      redirect_to @shop, notice: "プロフィールを更新しました。"
+      redirect_to @shop, notice: "店舗プロフィールを更新しました。"
     else
       render :edit
     end
@@ -21,13 +21,17 @@ class Public::ShopsController < ApplicationController
   private
 
   def shop_params
-    params.require(:shop).permit(:name, :email, :password, :password_confirmation)
+    permitted = [:name, :email]
+    if params[:shop][:password].present?
+      permitted += [:password, :password_confirmation]
+    end
+    params.require(:shop).permit(permitted)
   end
 
   def set_shop
     @shop = Shop.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    redirect_to root_path, alert: "該当するユーザーが見つかりません。"
+    redirect_to root_path, alert: "該当する店舗が見つかりません。"
   end
 
   def authorize_shop!
