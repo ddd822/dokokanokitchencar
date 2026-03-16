@@ -1,4 +1,4 @@
-<h2>一般会員Log in</h2>
+<h2>一般会員ログイン</h2>
 
 <%= form_with model: @customer, url: customer_session_path do |f| %>
 
@@ -20,7 +20,7 @@
   <% end %>
 
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit "ログイン", class: 'btn btn-success' %>
   </div>
 <% end %>
 
