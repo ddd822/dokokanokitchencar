@@ -14,6 +14,7 @@ class Public::CustomersController < ApplicationController
     if @customer.update(customer_params)
       redirect_to @customer, notice: "ユーザープロフィールを更新しました。"
     else
+      flash.now[:alert] = '更新に失敗しました。'
       render :edit
     end
   end

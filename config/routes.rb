@@ -9,14 +9,22 @@ devise_for :customers, path: 'customers', controllers: {
   registrations: 'public/customers/registrations'
 }
   
+get '/about', to: 'homes#about'
+root to: "homes#top"
+
   scope module: :public do
-    resources :posts
+    resources :posts do
+      resources :comments, only: [:create, :destroy]
+    end
+    
     resources :shops
     resources :customers
   end
 
-  get '/about', to: 'homes#about'
-  root to: "homes#top"
+  resources :posts do
+    resources :comments, only: [:create, :destroy]
+  end
+  
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
