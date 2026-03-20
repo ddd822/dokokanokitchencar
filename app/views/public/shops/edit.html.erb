@@ -15,6 +15,16 @@
     </div>
 
     <div class="md-3">
+      <%= f.label :email, "電話番号（ハイフンなし）" %><br>
+      <%= f.text_field :telephone_number, placeholder: "00000000000" %>
+    </div>
+
+    <div class="md-3">
+      <%= f.label :email, "店舗紹介" %><br>
+      <%= f.text_area :introduction, class: "form-control", rows: 3, placeholder: "店舗紹介を入力できます（300字以内）" %>
+    </div>
+
+    <div class="md-3">
       <%= f.label :password, "パスワード（変更する場合のみ入力）" %><br>
       <%= f.password_field :password, autocomplete: "new-password" %>
     </div>
