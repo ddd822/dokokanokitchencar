@@ -4,15 +4,20 @@
       <table class='table'>
       <tr>
         <th>ユーザーネーム</th>
-        <th><%= @shop.name %></th>
+        <td><%= @shop.name %></td>
       </tr>
       <tr>
 	      <th>メールアドレス</th>
-	      <th><%= @shop.email %></th>
+	      <td><%= @shop.email %></td>
       </tr>
     </table>
     <% if shop_signed_in? && @shop == current_shop %>
+    <div class='my-3'>
       <%= link_to 'プロフィールを編集する', edit_shop_path(@shop), class: "btn btn-sm btn-success" %>
+    </div>
+      <div class='my-3'>
+        <%= link_to '退会する', shop_path(@shop), method: :delete, data: { confirm: '本当に退会しますか？' }, class: "btn btn-sm btn-danger" %>
+      </div>
     <% end %>
   </div>
   <div class='col-md-5 offset-md-1'>

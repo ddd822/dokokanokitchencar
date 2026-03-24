@@ -1,0 +1,29 @@
+<h1>投稿一覧</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>ユーザー種別</th>
+      <th>ユーザー名</th>
+      <th>title</th>
+      <th>body</th>      
+      <th>投稿日</th>
+      
+      <th></th>
+    </tr>
+  </head>
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= link_to post.id, admin_post_path(post) %></td>
+        <td><%= post.postable_type %></td>
+        <td><%= post.postable.name %></td>
+        <td><%= post.title %></td>
+        <td><%= post.body %></td>        
+        <td><%= post.created_at.strftime("%Y/%m/%d %H:%M") %></td>        
+        <td><%= link_to "詳細", admin_post_path(post), class: "btn btn-outline-primary" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

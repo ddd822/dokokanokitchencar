@@ -1,16 +1,12 @@
 <div class="row">
   <div class='col-8 mx-auto'>
-    <h2>投稿一覧<h2>
-    <ul>
-      <% @posts.each do |post| %>
-        <li>
-          <h3><%= link_to post.title, post_path(post) %></h3>
-          <p><%= truncate(post.body, length: 100) %></p>                
-          <small>投稿日: <%= post.created_at.strftime("%Y/%m/%d %H:%M") %></small>
-          <small>| コメント（<%= post.comments.count %>件）</small>
-        </li>
-        <hr>
+    <h2>投稿一覧</h2>
+    <% @posts.each do |post| %>
+      <p>タイトル：<%= link_to post.title, post_path(post) %></p>
+      <p>本文：<%= truncate(post.body, length: 100) %></p>
+      <p><small>投稿日: <%= post.created_at.strftime("%Y/%m/%d %H:%M") %> ｜ コメント（<%= post.comments.count %>件）</small></p>
+      <hr>
       <% end %>
-    </ul>
+
   </div>
 </div>

@@ -1,17 +1,17 @@
 <div class='row'>
-  <div class="col-8 mx-auto">
-    <h2>投稿編集</h2>
+  <div class="col-6 mx-auto">
+    <h2>投稿の編集</h2>
     <%= form_with model: @post do |f| %>
       <%= render 'layouts/error_messages', model: f.object, resource: @post %>
-      <div class="md-3">
-        <%= f.label :タイトル, class: 'form-label' %>
+      <div class="mb-1">
+        <h5><%= f.label :タイトル, class: 'form-label' %></h5>
         <%= f.text_field :title, class: 'form-control' %>
       </div>
-      <div class="md-3">
-        <%= f.label :本文, class: 'form-label' %>
+      <div>
+        <h5><%= f.label :本文, class: 'form-label' %></h5>
         <%= f.text_area :body, class: 'form-control', rows: 5  %>
       </div>
-      <div class="md-3">
+      <div class="my-1">
         <%= f.submit '更新する', class: 'btn btn-success' %>
       </div>
     <% end %>

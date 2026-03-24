@@ -1,7 +1,7 @@
 class Public::CustomersController < ApplicationController
   before_action :authenticate_customer!
-  before_action :set_customer, only: [:show, :edit, :update]
-  before_action :authorize_customer!, only: [:show, :edit, :update]
+  before_action :set_customer, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_customer!, only: [:show, :edit, :update, :destroy]
 
   def show
     @posts = @customer.posts.order(created_at: :desc)
@@ -17,6 +17,12 @@ class Public::CustomersController < ApplicationController
       flash.now[:alert] = '更新に失敗しました。'
       render :edit
     end
+  end
+
+  def destroy
+    @customer.destroy
+    sign_out @customer
+    redirect_to root_path, notice: '退会処理が完了しました。ご利用ありがとうございました。'
   end
 
   private

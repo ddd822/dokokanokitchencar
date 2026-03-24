@@ -1,13 +1,23 @@
 <div class="row">
-  <div class="col-8 mx-auto">
-    <h2><%= @post.title %></h2>
-    <p><%= @post.body %></p>
-    <p>投稿者:<strong><%= @post.postable.name %></strong></p>
-    <p>投稿日: <%= @post.created_at.strftime("%Y/%m/%d %H:%M") %></p>
-    <% if @post.postable == current_shop || @post.postable == current_customer %>
-      <%= link_to '編集', edit_post_path(@post), class: "btn btn-sm btn-success" %> |
-      <%= link_to '削除', post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-sm btn-danger" %>
-    <% end %>
+  <div class="col-6 mx-auto">
+    <h2>投稿の詳細</h2>
+    <table class='table'>
+    <tr>
+      <th>タイトル</th>
+      <td><%= @post.title %></td>
+    </tr>
+    <tr>
+      <th>内容</th>
+      <td><%= @post.body %></td>
+    </tr>
+    </table>
+    <p>投稿者:<%= @post.postable.name %></p>
+    <p>投稿日:<%= @post.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+
+      <% if @post.postable == current_shop || @post.postable == current_customer %>
+        <%= link_to '編集', edit_post_path(@post), class: "btn btn-sm btn-success" %> |
+        <%= link_to '削除', post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-sm btn-danger" %>
+      <% end %>
 
     <hr>
 
@@ -27,7 +37,7 @@
       <h4>コメントを投稿する</h4>
       <%= form_with model: [@post, Comment.new], local: true do |f| %>
         <div>
-          <%= f.text_area :body, class: "form-control", rows: 5, placeholder: "コメントを入力してください" %>
+          <%= f.text_area :body, class: "form-control", rows: 3, placeholder: "コメントが入力できます（200字以内）" %>
         </div>
         <div>
           <%= f.submit "コメントを投稿する", class: "btn btn-sm btn-info mt-2" %>

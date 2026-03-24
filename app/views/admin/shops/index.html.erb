@@ -1,0 +1,27 @@
+<h1>店舗ユーザー一覧</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>name</th>
+      <th>email</th>
+      <th>telephone_number</th>
+      <th>introduction</th>
+      <th></th>
+    </tr>
+  </head>
+  <tbody>
+    <% @shops.each do |shop| %>
+      <tr>
+        <td><%= link_to shop.id, admin_shop_path(shop) %></td>
+        <td><%= shop.name %></td>
+        <td><%= shop.email %></td>
+        <td><%= shop.telephone_number %></td>
+        <td><%= shop.introduction %></td>
+        <td><%= link_to "詳細", admin_shop_path(shop), class: "btn btn-outline-primary" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

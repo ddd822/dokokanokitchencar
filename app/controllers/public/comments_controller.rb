@@ -1,9 +1,9 @@
 class Public::CommentsController < ApplicationController
   before_action :authenticate_shop!, if: -> { shop_signed_in? }
-    before_action :authenticate_customer!, if: -> { customer_signed_in? }
-    before_action :set_post
-    before_action :set_comment, only: [:destroy]
-    before_action :authorize_comment!, only: [:destroy]
+  before_action :authenticate_customer!, if: -> { customer_signed_in? }
+  before_action :set_post
+  before_action :set_comment, only: [:destroy]
+  before_action :authorize_comment!, only: [:destroy]
 
     def create
       @comment = @post.comments.build(comment_params)

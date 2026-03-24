@@ -1,7 +1,7 @@
 class Public::ShopsController < ApplicationController
   before_action :authenticate_shop!
-  before_action :set_shop, only: [:show, :edit, :update]
-  before_action :authorize_shop!, only: [:show, :edit, :update]
+  before_action :set_shop, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_shop!, only: [:show, :edit, :update, :destroy]
 
   def show
     @posts = @shop.posts.order(created_at: :desc)
@@ -16,6 +16,12 @@ class Public::ShopsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @shop.destroy
+    sign_out @shop
+    redirect_to root_path, notice: '退会処理が完了しました。ご利用ありがとうございました。'
   end
 
   private
