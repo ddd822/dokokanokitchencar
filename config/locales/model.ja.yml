@@ -9,6 +9,13 @@ ja:
         email: メールアドレス
         telephone_number: 電話番号
         introduction: 紹介文
+        password: パスワード
+        password_confirmation: パスワード（確認用）
+        remember_me: ログインを記憶する
       customer:
         name: ユーザーネーム
         email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード（確認用）
+        remember_me: ログインを記憶する
+  

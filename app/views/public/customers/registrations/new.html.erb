@@ -6,7 +6,7 @@
       <%= render 'layouts/error_messages', model: f.object %>
 
       <div class="mb-2">
-        <%= f.label :name %
+        <%= f.label :name %>
         <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control" %>
       </div>
 
@@ -18,7 +18,7 @@
       <div class="mb-2">
         <%= f.label :password %>
         <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <em>(<%= @minimum_password_length %> 文字以上)</em>
         <% end %>
         <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
       </div>
@@ -34,5 +34,3 @@
     <% end %>
 
     <%= render "public/customers/shared/links" %>
-  </div>
-</div>
