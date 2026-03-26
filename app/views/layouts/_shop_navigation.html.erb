@@ -1,10 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
-    <a class="navbar-brand" href="/">どこかのキッチンカー</a>
+    <a class="navbar-brand" href="/">どこかのキッチンカー<i class="fa-solid fa-truck"></i></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <% if shop_signed_in? %>
           <li class="nav-item">
@@ -26,27 +26,6 @@
             <%= link_to "ログアウト", destroy_shop_session_path, method: :delete, class: "nav-link" %>
           </li>
         <% else %>
-          <li class="nav-item">
-            <%= link_to "HOME", root_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "ABOUT", about_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "投稿一覧", posts_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "一般会員登録", new_customer_registration_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "一般会員ログイン", new_customer_session_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "店舗会員登録", new_shop_registration_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "店舗会員ログイン", new_shop_session_path, class: "nav-link" %>
-          </li>
         <% end %>
       </ul>
     </div>
