@@ -1,44 +1,54 @@
 <div class="row">
-  <div class="md-3">
+  <div class="col-md-6 mx-auto">
     <h2>店舗プロフィール編集</h2>
   <%= form_with model: @shop do |f| %>
     <%= render 'layouts/error_messages', model: f.object %>
 
-    <div class="md-3">
+    <div class="mb-2">
       <%= f.label :name, "店舗名" %><br>
-      <%= f.text_field :name %>
+      <%= f.text_field :name, class: "form-control" %>
     </div>
 
-    <div class="md-3">
+    <div class="mb-2">
       <%= f.label :email, "メールアドレス" %><br>
-      <%= f.email_field :email %>
+      <%= f.email_field :email, class: "form-control" %>
     </div>
 
-    <div class="md-3">
-      <%= f.label :email, "電話番号（ハイフンなし）" %><br>
-      <%= f.text_field :telephone_number, placeholder: "00000000000" %>
+    <div class="mb-2">
+      <%= f.label :telephone_number, "電話番号（ハイフンなし）" %><br>
+      <%= f.text_field :telephone_number, placeholder: "00000000000", class: "form-control" %>
     </div>
 
-    <div class="md-3">
-      <%= f.label :email, "店舗紹介" %><br>
-      <%= f.text_area :introduction, class: "form-control", rows: 3, placeholder: "店舗紹介を入力できます（300字以内）" %>
+    <div class="mb-2">
+      <%= f.label :weekday_ids, "定休日" %><br>
+      <% Weekday.all.each do |weekday| %>
+        <label>
+          <%= check_box_tag "shop[weekday_ids][]", weekday.id, @shop.weekday_ids.include?(weekday.id) %>
+          <%= weekday.name %>
+        </label>
+      <% end %>
     </div>
 
-    <!--<div class="md-3">
+    <div class="mb-2">
+      <%= f.label :introduction, "店舗紹介" %><br>
+      <%= f.text_area :introduction, class: "form-control", rows: 3, placeholder: "店舗紹介を入力できます（300字以内）", class: "form-control" %>
+    </div>
+
+    <!--<div class="mb-2">
       <%= f.label :password, "パスワード（変更する場合のみ入力）" %><br>
-      <%= f.password_field :password, autocomplete: "new-password" %>
+      <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
     </div>
 
-    <div class="md-3">
+    <div class="mb-2">
       <%= f.label :password_confirmation, "パスワード確認" %><br>
-      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
     </div> -->
 
-    <div class="md-3">
+    <div class="my-4">
       <%= f.submit "更新する", class: 'btn btn-success' %>
     </div>
   <% end %>
-
+  
   <%= link_to 'マイページへ戻る', shop_path(@shop) %>
   </div>
 </div>

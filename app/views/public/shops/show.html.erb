@@ -10,6 +10,24 @@
 	      <th>メールアドレス</th>
 	      <td><%= @shop.email %></td>
       </tr>
+      <tr>
+        <th>電話番号</th>
+        <td><%= @shop.telephone_number.presence || "未設定" %></td>
+      </tr>
+      <tr>
+        <th>定休日</th>
+        <td>
+          <% if @shop.weekdays.any? %>
+            <%= @shop.weekdays.pluck(:name).join(", ") %>
+          <% else %>
+            未設定
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <th>店舗紹介</th>
+        <td><%= @shop.introduction.presence || "未設定" %></td>
+      </tr>
     </table>
     <% if shop_signed_in? && @shop == current_shop %>
     <div class='my-3'>

@@ -27,7 +27,7 @@ class Public::ShopsController < ApplicationController
   private
 
   def shop_params
-    permitted = [:name, :email]
+    permitted = [:name, :email, :telephone_number, :introduction, :weekday_ids => []]
     if params[:shop][:password].present?
       permitted += [:password, :password_confirmation]
     end

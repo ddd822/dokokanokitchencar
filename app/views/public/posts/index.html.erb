@@ -1,12 +1,12 @@
 <div class="row">
-  <div class='col-8 mx-auto'>
+  <div class='col-6 mx-auto'>
     <h2>投稿一覧</h2>
     <% @posts.each do |post| %>
       <p>タイトル：<%= link_to post.title, post_path(post) %></p>
       <p>本文：<%= truncate(post.body, length: 100) %></p>
       <p><small>投稿日: <%= post.created_at.strftime("%Y/%m/%d %H:%M") %> ｜ コメント（<%= post.comments.count %>件）</small></p>
       <hr>
-      <% end %>
+    <% end %>
 
   </div>
 </div>
