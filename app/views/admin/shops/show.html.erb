@@ -8,20 +8,30 @@
           <td><%= @shop.id %></td>
         </tr>
         <tr>
-          <th>name</th>
+          <th>店舗名</th>
           <td><%= @shop.name %></td>
         </tr>
         <tr>
-          <th>email</th>
+          <th>メールアドレス</th>
           <td><%= @shop.email %></td>
         </tr>
         <tr>
           <th>電話番号</th>
-          <td><%= @shop.telephone_number %></td>
+          <td><%= @shop.telephone_number.presence || "未設定" %></td>
+        </tr>
+        <tr>
+        <th>定休日</th>
+        <td>
+          <% if @shop.weekdays.any? %>
+            <%= @shop.weekdays.pluck(:name).join(", ") %>
+          <% else %>
+            未設定
+          <% end %>
+        </td>
         </tr>
         <tr>
           <th>店舗紹介</th>
-          <td><%= @shop.introduction %></td>
+          <td><%= @shop.introduction.presence || "未設定" %></td>
         </tr>
       </tbody>
     </table>

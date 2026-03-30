@@ -4,10 +4,11 @@
   <thead>
     <tr>
       <th>id</th>
-      <th>name</th>
-      <th>email</th>
-      <th>telephone_number</th>
-      <th>introduction</th>
+      <th>店舗名</th>
+      <th>メールアドレス</th>
+      <th>電話番号</th>
+      <th>定休日</th>
+      <th>店舗紹介</th>
       <th></th>
     </tr>
   </head>
@@ -17,8 +18,15 @@
         <td><%= link_to shop.id, admin_shop_path(shop) %></td>
         <td><%= shop.name %></td>
         <td><%= shop.email %></td>
-        <td><%= shop.telephone_number %></td>
-        <td><%= shop.introduction %></td>
+        <td><%= shop.telephone_number.presence || "未設定" %></td>
+        <td>
+          <% if shop.weekdays.any? %>
+            <%= shop.weekdays.pluck(:name).join(", ") %>
+          <% else %>
+            未設定
+          <% end %>
+        </td>
+        <td><%= shop.introduction.presence || "未設定" %></td>
         <td><%= link_to "詳細", admin_shop_path(shop), class: "btn btn-outline-primary" %></td>
       </tr>
     <% end %>
