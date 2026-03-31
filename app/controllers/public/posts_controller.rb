@@ -29,6 +29,17 @@ class Public::PostsController < ApplicationController
     @posts = Post.order(created_at: :desc)
   end
 
+  def search
+    @keyword = params[:keyword]
+    if @keyword.present?
+      @posts = Post.where("title LIKE :keyword OR body LIKE :keyword", keyword: "%#{@keyword}%")
+                    .order(created_at: :desc)
+    else
+      @posts = Post.none
+    end
+      render :index
+    end
+
   def show
   end
 

@@ -21,6 +21,7 @@
             <%= link_to "新規投稿", new_post_path, class: "nav-link" %>
           </li>
         </ul>
+        <%= render 'layouts/search' %>
         <ul class="navbar-nav">
           <li class="nav-item">
             <%= link_to "マイページ", customer_path(current_customer), class: "nav-link" %>
