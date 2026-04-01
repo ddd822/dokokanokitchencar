@@ -7,6 +7,17 @@ class Admin::PostsController < ApplicationController
     @posts = Post.all
   end
 
+  def search
+    @keyword = params[:keyword]
+    if @keyword.present?
+      @posts = Post.where("title LIKE :keyword OR body LIKE :keyword", keyword: "%#{@keyword}%")
+                    .order(created_at: :desc)
+    else
+      @posts = Post.all.order(created_at: :desc)
+    end
+    render :index
+  end
+
   def show
     @post = Post.find(params[:id])
   end

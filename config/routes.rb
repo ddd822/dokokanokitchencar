@@ -8,7 +8,11 @@ Rails.application.routes.draw do
     root to: 'customers#index'
     resources :customers, only: [:index, :show, :destroy ]
     resources :shops, only: [:index, :show, :destroy ]
-    resources :posts, only: [:index, :show, :destroy ]
+    resources :posts, only: [:index, :show, :destroy ] do
+      collection do
+        get :search
+      end
+    end
   end
 
   devise_for :shops, path: 'shops', controllers: {
