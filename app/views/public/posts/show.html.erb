@@ -2,14 +2,14 @@
   <div class="col-6 mx-auto">
     <h2>投稿の詳細</h2>
     <table class='table'>
-    <tr>
-      <th>タイトル</th>
-      <td><%= @post.title %></td>
-    </tr>
-    <tr>
-      <th>内容</th>
-      <td><%= @post.body %></td>
-    </tr>
+      <tr>
+        <th>タイトル</th>
+        <td><%= @post.title %></td>
+      </tr>
+      <tr>
+        <th>内容</th>
+        <td><%= @post.body %></td>
+      </tr>
     </table>
     <p>投稿者:<%= @post.postable.name %></p>
     <p>投稿日:<%= @post.created_at.strftime("%Y/%m/%d %H:%M") %></p>

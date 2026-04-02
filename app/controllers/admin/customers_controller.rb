@@ -7,6 +7,17 @@ class Admin::CustomersController < ApplicationController
     @customers = Customer.all
   end
 
+  def search
+    @keyword = params[:keyword]
+    if @keyword.present?
+      @customers = Customer.where("name LIKE :keyword OR email LIKE :keyword", keyword: "%#{@keyword}%")
+                    .order(created_at: :desc)
+    else
+      @customers = Customer.none
+    end
+    render :index
+  end
+
   def show
     @customer = Customer.find(params[:id])
     @posts = @customer.posts.order(created_at: :desc)

@@ -7,6 +7,17 @@ class Admin::ShopsController < ApplicationController
     @shops = Shop.all
   end
 
+  def search
+    @keyword = params[:keyword]
+    if @keyword.present?
+      @shops = Shop.where("name LIKE :keyword OR email LIKE :keyword", keyword: "%#{@keyword}%")
+                    .order(created_at: :desc)
+    else
+      @shops = Shop.none
+    end
+    render :index
+  end
+
   def show
     @shop = Shop.find(params[:id])
     @posts = @shop.posts.order(created_at: :desc)

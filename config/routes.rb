@@ -6,12 +6,23 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: 'customers#index'
-    resources :customers, only: [:index, :show, :destroy ]
-    resources :shops, only: [:index, :show, :destroy ]
+    resources :customers, only: [:index, :show, :destroy ] do
+      collection do
+        get :search
+      end
+    end
+
+    resources :shops, only: [:index, :show, :destroy ] do
+      collection do
+        get :search
+      end
+    end
+    
     resources :posts, only: [:index, :show, :destroy ] do
       collection do
         get :search
       end
+      resources :comments, only: [:destroy]
     end
   end
 

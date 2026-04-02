@@ -1,29 +1,41 @@
-<h1>投稿一覧</h1>
+<div class="row">
+  <div class='col-10 mx-auto'>
+    <h1>投稿一覧</h1>
+    <div class="col-6">
+      <%= form_with url: search_admin_posts_path, method: :get do |form| %>
+        <%= form.text_field :keyword, value: params[:keyword], placeholder: "タイトルまたは内容で投稿を検索", class: "form-control" %>
+        <%= form.submit "検索", class: "btn btn-warning my-2" %>
+      <% end %>
+    </div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>id</th>
-      <th>ユーザー種別</th>
-      <th>ユーザー名</th>
-      <th>タイトル</th>
-      <th>内容</th>      
-      <th>投稿日</th>
-      
-      <th></th>
-    </tr>
-  </head>
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= link_to post.id, admin_post_path(post) %></td>
-        <td><%= post.postable_type %></td>
-        <td><%= post.postable.name %></td>
-        <td><%= post.title %></td>
-        <td><%= post.body %></td>        
-        <td><%= post.created_at.strftime("%Y/%m/%d %H:%M") %></td>        
-        <td><%= link_to "詳細", admin_post_path(post), class: "btn btn-outline-primary" %></td>
-      </tr>
+    <% if @keyword.present? %>
+      <h3>「<%= @keyword %>」の検索結果: <%= @posts.count %>件</h3>
     <% end %>
-  </tbody>
-</table>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>ユーザー種別</th>
+          <th>ユーザー名</th>
+          <th>タイトル</th>
+          <th>内容</th>      
+          <th>投稿日</th>
+          
+          <th></th>
+        </tr>
+      </head>
+      <tbody>
+        <% @posts.each do |post| %>
+          <tr>
+            <td><%= link_to post.id, admin_post_path(post) %></td>
+            <td><%= post.postable_type %></td>
+            <td><%= post.postable.name %></td>
+            <td><%= post.title %></td>
+            <td><%= post.body %></td>        
+            <td><%= post.created_at.strftime("%Y/%m/%d %H:%M") %></td>        
+            <td><%= link_to "詳細", admin_post_path(post), class: "btn btn-outline-primary" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>

@@ -1,22 +1,36 @@
-<h1>一般ユーザー一覧</h1>
+<div class="row">
+  <div class='col-10 mx-auto'>
+    <h1>一般ユーザー一覧</h1>
+    <div class="col-6">
+      <%= form_with url: search_admin_customers_path, method: :get do |form| %>
+        <%= form.text_field :keyword, value: params[:keyword], placeholder: "ユーザー名またはメールアドレスで検索", class: "form-control" %>
+        <%= form.submit "検索", class: "btn btn-warning my-2" %>
+      <% end %>
+    </div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>id</th>
-      <th>ユーザーネーム</th>
-      <th>メールアドレス</th>
-      <th></th>
-    </tr>
-  </head>
-  <tbody>
-    <% @customers.each do |customer| %>
-      <tr>
-        <td><%= link_to customer.id, admin_customer_path(customer) %></td>
-        <td><%= customer.name %></td>
-        <td><%= customer.email %></td>
-        <td><%= link_to "詳細", admin_customer_path(customer), class: "btn btn-outline-primary" %></td>
-      </tr>
+    <% if @keyword.present? %>
+      <h3>「<%= @keyword %>」の検索結果: <%= @customers.count %>件</h3>
     <% end %>
-  </tbody>
-</table>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>ユーザーネーム</th>
+          <th>メールアドレス</th>
+          <th></th>
+        </tr>
+      </head>
+      <tbody>
+        <% @customers.each do |customer| %>
+          <tr>
+            <td><%= link_to customer.id, admin_customer_path(customer) %></td>
+            <td><%= customer.name %></td>
+            <td><%= customer.email %></td>
+            <td><%= link_to "詳細", admin_customer_path(customer), class: "btn btn-outline-primary" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

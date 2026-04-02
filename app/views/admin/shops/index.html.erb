@@ -1,35 +1,49 @@
-<h1>店舗ユーザー一覧</h1>
+<div class="row">
+  <div class='col-10 mx-auto'>
+    <h1>店舗ユーザー一覧</h1>
+    <div class="col-6">
+      <%= form_with url: search_admin_shops_path, method: :get do |form| %>
+        <%= form.text_field :keyword, value: params[:keyword], placeholder: "店舗名またはメールアドレスで検索", class: "form-control" %>
+        <%= form.submit "検索", class: "btn btn-warning my-2" %>
+      <% end %>
+    </div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>id</th>
-      <th>店舗名</th>
-      <th>メールアドレス</th>
-      <th>電話番号</th>
-      <th>定休日</th>
-      <th>店舗紹介</th>
-      <th></th>
-    </tr>
-  </head>
-  <tbody>
-    <% @shops.each do |shop| %>
-      <tr>
-        <td><%= link_to shop.id, admin_shop_path(shop) %></td>
-        <td><%= shop.name %></td>
-        <td><%= shop.email %></td>
-        <td><%= shop.telephone_number.presence || "未設定" %></td>
-        <td>
-          <% if shop.weekdays.any? %>
-            <%= shop.weekdays.pluck(:name).join(", ") %>
-          <% else %>
-            未設定
-          <% end %>
-        </td>
-        <td><%= shop.introduction.presence || "未設定" %></td>
-        <td><%= link_to "詳細", admin_shop_path(shop), class: "btn btn-outline-primary" %></td>
-      </tr>
+    <% if @keyword.present? %>
+      <h3>「<%= @keyword %>」の検索結果: <%= @shops.count %>件</h3>
     <% end %>
-  </tbody>
-</table>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>店舗名</th>
+          <th>メールアドレス</th>
+          <th>電話番号</th>
+          <th>定休日</th>
+          <th>店舗紹介</th>
+          <th></th>
+        </tr>
+      </head>
+      <tbody>
+        <% @shops.each do |shop| %>
+          <tr>
+            <td><%= link_to shop.id, admin_shop_path(shop) %></td>
+            <td><%= shop.name %></td>
+            <td><%= shop.email %></td>
+            <td><%= shop.telephone_number.presence || "未設定" %></td>
+            <td>
+              <% if shop.weekdays.any? %>
+                <%= shop.weekdays.pluck(:name).join(", ") %>
+              <% else %>
+                未設定
+              <% end %>
+            </td>
+            <td><%= shop.introduction.presence || "未設定" %></td>
+            <td><%= link_to "詳細", admin_shop_path(shop), class: "btn btn-outline-primary" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
