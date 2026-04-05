@@ -5,6 +5,7 @@ class Public::ShopsController < ApplicationController
 
   def show
     @posts = @shop.posts.order(created_at: :desc)
+    @comments = @shop.comments.includes(:commentable).order(created_at: :desc)
   end
   
   def edit
@@ -42,7 +43,7 @@ class Public::ShopsController < ApplicationController
 
   def authorize_shop!
     unless @shop == current_shop
-      redirect_to root_path, alert: "権限がありません。"
+      redirect_to shop_path(current_shop), alert: "権限がありません。"
     end
   end
 

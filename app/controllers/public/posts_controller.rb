@@ -1,5 +1,5 @@
 class Public::PostsController < ApplicationController
-  before_action :authenticate_user!,  only: [:edit, :update, :destroy]
+  before_action :authenticate_user!,  only: [:new, :edit, :update, :destroy]
   before_action :authenticate_shop!, only: [:create], if: -> { shop_signed_in? }
   before_action :authenticate_customer!, only: [:create], if: -> { customer_signed_in? }
   before_action :set_post, only: [:show, :edit, :update, :destroy]
@@ -35,7 +35,8 @@ class Public::PostsController < ApplicationController
       @posts = Post.where("title LIKE :keyword OR body LIKE :keyword", keyword: "%#{@keyword}%")
                     .order(created_at: :desc)
     else
-      @posts = Post.none
+      flash.now[:alert] = "検索キーワードを入力してください"
+      @posts = Post.order(created_at: :desc)
     end
       render :index
     end
@@ -56,7 +57,11 @@ class Public::PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to posts_path, notice: "投稿を削除しました。"
+    if shop_signed_in?
+      redirect_to shop_path(current_shop), notice: "投稿を削除しました。"
+    elsif customer_signed_in?
+      redirect_to customer_path(current_customer), notice: "投稿を削除しました。"
+    end
   end
 
   private

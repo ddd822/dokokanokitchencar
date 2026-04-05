@@ -21,13 +21,14 @@
 
     <hr>
 
-    <p>コメント（<%= @post.comments.count %>件）</p>
+    <h5>コメント（<%= @post.comments.count %>件）</h5>
     <% @post.comments.each do |comment| %>
       <div>
-        <p><strong><%= comment.user.name %></strong></p>
-        <p><%= comment.body %></p>
+        <p><%= simple_format(comment.body) %></p>
+        <small>(ユーザー名: <%= comment.user.name %>)</small><br>
+        <small>(コメント日時: <%= comment.created_at.strftime("%Y/%m/%d %H:%M") %>)</small><br>
         <% if comment.user == current_shop || comment.user == current_customer %>
-          <%= link_to 'コメント削除', post_comment_path(@post, comment), method: :delete, data: { confirm: '削除しますか？' }, class: "btn btn-sm btn-danger" %>
+          <%= link_to 'コメント削除', post_comment_path(@post, comment), method: :delete, data: { confirm: '削除しますか？' }, class: "btn btn-sm btn-outline-danger" %>
         <% end %>
       </div>
       <hr>

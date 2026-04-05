@@ -24,8 +24,9 @@
       <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
     </div> -->
 
-    <div class="my-2">
+    <div class="my-4">
       <%= f.submit "更新する", class: 'btn btn-success' %>
+      <%= button_to '退会する', customer_path(@customer), method: :delete, data: { confirm: '本当に退会しますか？' }, class: "btn btn-danger" %>
     </div>
   <% end %>
 

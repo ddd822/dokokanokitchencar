@@ -46,6 +46,7 @@
 
     <div class="my-4">
       <%= f.submit "更新する", class: 'btn btn-success' %>
+      <%= button_to '退会する', shop_path(@shop), method: :delete, data: { confirm: '本当に退会しますか？' }, class: "btn btn-danger" %>
     </div>
   <% end %>
   

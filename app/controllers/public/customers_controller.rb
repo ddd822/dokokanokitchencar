@@ -5,6 +5,7 @@ class Public::CustomersController < ApplicationController
 
   def show
     @posts = @customer.posts.order(created_at: :desc)
+    @comments = @customer.comments.includes(:commentable).order(created_at: :desc)
   end
   
   def edit
@@ -44,7 +45,7 @@ class Public::CustomersController < ApplicationController
 
   def authorize_customer!
     unless @customer == current_customer
-      redirect_to root_path, alert: "権限がありません。"
+      redirect_to customer_path(current_customer), alert: "権限がありません。"
     end
   end
 

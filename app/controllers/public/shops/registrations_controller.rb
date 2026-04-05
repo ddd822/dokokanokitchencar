@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Public::Shops::RegistrationsController < Devise::RegistrationsController
+  before_action :redirect_if_customer_logged_in, only: [:new, :create]
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -38,7 +39,19 @@ class Public::Shops::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
+
+  def after_sign_up_path_for(resource)
+    shop_path(current_shop)
+  end
+
+  private
+
+  def redirect_if_customer_logged_in
+    if customer_signed_in?
+      redirect_to customer_path(current_customer), alert: "一般ユーザーでログイン中にはアクセスできません。"
+    end
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
