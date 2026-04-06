@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_tags_for_search
   layout :choose_layout
 
 
@@ -11,6 +12,10 @@ class ApplicationController < ActionController::Base
 
 
   private
+
+  def set_tags_for_search
+    @tags = Tag.all.order(:name)
+  end
 
   def choose_layout
     if shop_signed_in?

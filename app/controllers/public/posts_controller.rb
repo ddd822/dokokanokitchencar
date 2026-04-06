@@ -10,15 +10,16 @@ class Public::PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = Post.new(post_params.except(:tag_names))
     if shop_signed_in?
       @post.postable = current_shop
-    elsif customer_signed_in?
+    elseif customer_signed_in?
       @post.postable = current_customer
     else
       redirect_to root_path, alert: "ログインしてください" and return
     end
     if @post.save
+      @post.tags = find_or_create_tags(post_params[:tag_names])
       redirect_to @post, notice: "投稿が作成されました"
     else
       render :new, alert: "ログインしてください。"
@@ -31,15 +32,25 @@ class Public::PostsController < ApplicationController
 
   def search
     @keyword = params[:keyword]
-    if @keyword.present?
-      @posts = Post.where("title LIKE :keyword OR body LIKE :keyword", keyword: "%#{@keyword}%")
-                    .order(created_at: :desc)
+    @tag_id = params[:tag_id]
+    if @keyword.blank? && @tag_id.blank?
+      @posts = Post.none
+      flash.now[:alert] = "検索キーワードまたはタグを入力してください。"
     else
-      flash.now[:alert] = "検索キーワードを入力してください"
       @posts = Post.order(created_at: :desc)
+      if @keyword.present?
+        @posts = @posts.where("title LIKE :keyword OR body LIKE :keyword", keyword: "%#{@keyword}%")
+      end
+
+      if @tag_id.present?      
+        @posts = @posts.joins(:tags).where(tags: { id: @tag_id }).distinct
+      end
     end
+      @posts = @posts.order(created_at: :desc)
+      @tags = Tag.all
+      
       render :index
-    end
+  end
 
   def show
   end
@@ -48,8 +59,9 @@ class Public::PostsController < ApplicationController
   end
 
   def update
-    if @post.update(post_params)
-      redirect_to @post, notice: "投稿を更新しました。"
+    if @post.update(post_params.except(:tag_names))
+      @post.tags = find_or_create_tags(post_params[:tag_names])
+      redirect_to post_path(@post), notice: "投稿を更新しました。"
     else
       render :edit
     end
@@ -66,15 +78,23 @@ class Public::PostsController < ApplicationController
 
   private
 
+  def find_or_create_tags(tag_names)
+    return [] if tag_names.blank?
+
+    tag_names.split(',').map(&:strip).uniq.map do |name|
+      Tag.find_or_create_by(name: name)
+    end
+  end
+
   def post_params
-    params.require(:post).permit(:title, :body)
+    params.require(:post).permit(:title, :body, :address, :tag_names)
   end
 
   def set_post
     @post = Post.find(params[:id])
     rescue ActiveRecord::RecordNotFound
     redirect_to posts_path, alert: "投稿が見つかりません。"
-  end
+  end  
 
   def current_postable
     if shop_signed_in?

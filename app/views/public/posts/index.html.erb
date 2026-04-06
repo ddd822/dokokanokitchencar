@@ -5,6 +5,11 @@
       <h3>「<%= @keyword %>」の検索結果: <%= @posts.count %>件</h3>
     <% end %>
 
+    <% if @tag_id.present? %>
+      <% selected_tag = @tags.find { |t| t.id == @tag_id.to_i } %>
+      <p>タグ絞り込み: <%= selected_tag&.name || '不明なタグ' %></p>
+    <% end %>
+
     <% @posts.each do |post| %>
       <h3><%= link_to post.title, post_path(post) %></h3>
       <p><%= truncate(post.body, length: 100) %></p>
@@ -18,6 +23,9 @@
         <% end %>
       </p>
       <p><small>投稿日: <%= post.created_at.strftime("%Y/%m/%d %H:%M") %> ｜ コメント（<%= post.comments.count %>件）</small></p>
+      <p class="card-title">
+        <span><i class="fa-solid fa-location-dot"></i> <%= post.address %></span>
+      </p>
       <hr>
     <% end %>
 

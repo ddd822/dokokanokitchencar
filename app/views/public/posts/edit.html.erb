@@ -11,11 +11,15 @@
         <h5><%= f.label :本文, class: 'form-label' %></h5>
         <%= f.text_area :body, class: 'form-control', rows: 5  %>
       </div>
+      <div>
+        <%= f.label :tag_names, "タグ（カンマ区切り）" %><br>
+        <%= f.text_field :tag_names, value: @post.tags.pluck(:name).join(", "), placeholder: "例：Ruby, Rails, Web" %>
+      </div>
       <div class="my-2">
         <%= f.submit '更新する', class: 'btn btn-success' %>
-        <%= button_to '削除', post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger" %>
       </div>
     <% end %>
+    <%= button_to '削除', post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger" %>
     
     <%= link_to '投稿詳細へ戻る', post_path(@post) %> |
     <%= link_to '投稿一覧へ戻る', posts_path %>

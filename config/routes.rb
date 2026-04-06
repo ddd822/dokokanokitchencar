@@ -23,6 +23,7 @@ Rails.application.routes.draw do
         get :search
       end
       resources :comments, only: [:destroy]
+      resources :tags, only: [:index,:destroy]
     end
   end
 
@@ -46,7 +47,7 @@ Rails.application.routes.draw do
       end
       resources :comments, only: [:create, :destroy]
     end
-    
+    resources :tags, only: [:index]
     resources :shops
     resources :customers
   end
