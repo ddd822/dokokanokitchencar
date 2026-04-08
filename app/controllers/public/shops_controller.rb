@@ -4,8 +4,8 @@ class Public::ShopsController < ApplicationController
   before_action :authorize_shop!, only: [:show, :edit, :update, :destroy]
 
   def show
-    @posts = @shop.posts.order(created_at: :desc)
-    @comments = @shop.comments.includes(:commentable).order(created_at: :desc)
+    @posts = @shop.posts.order(created_at: :desc).page(params[:page])
+    @comments = @shop.comments.includes(:commentable).order(created_at: :desc).page(params[:page])
   end
   
   def edit

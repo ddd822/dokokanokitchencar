@@ -52,6 +52,7 @@
     <% else %>
       <p>まだ投稿がありません。</p>
     <% end %>
+    <%= paginate @posts %>
   </div>
   <div class='col-md-4'>  
     <h2>あなたのコメント一覧</h2>
@@ -70,7 +71,8 @@
               <% end %></small>
             </li>
           </div>
-        <% end %>      
+        <% end %>
+        <%= paginate @comments %>
       </ul>
     <% else %>
       <p>コメントはまだありません。</p>

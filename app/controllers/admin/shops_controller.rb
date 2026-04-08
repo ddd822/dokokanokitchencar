@@ -4,7 +4,7 @@ class Admin::ShopsController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @shops = Shop.all
+    @shops = Shop.page(params[:page])
   end
 
   def search
@@ -20,7 +20,7 @@ class Admin::ShopsController < ApplicationController
 
   def show
     @shop = Shop.find(params[:id])
-    @posts = @shop.posts.order(created_at: :desc)
+    @posts = @shop.posts.order(created_at: :desc).page(params[:page])
   end
 
   def destroy

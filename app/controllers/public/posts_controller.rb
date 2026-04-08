@@ -11,23 +11,18 @@ class Public::PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params.except(:tag_names))
-    if shop_signed_in?
-      @post.postable = current_shop
-    elseif customer_signed_in?
-      @post.postable = current_customer
-    else
-      redirect_to root_path, alert: "ログインしてください" and return
-    end
+    @post.postable = current_shop || current_customer
+
     if @post.save
       @post.tags = find_or_create_tags(post_params[:tag_names])
       redirect_to @post, notice: "投稿が作成されました"
     else
-      render :new, alert: "ログインしてください。"
+      render :new, alert: "ログイン"
     end
   end
   
   def index
-    @posts = Post.order(created_at: :desc)
+    @posts = Post.order(created_at: :desc).page(params[:page])
   end
 
   def search
@@ -46,7 +41,7 @@ class Public::PostsController < ApplicationController
         @posts = @posts.joins(:tags).where(tags: { id: @tag_id }).distinct
       end
     end
-      @posts = @posts.order(created_at: :desc)
+      @posts = @posts.order(created_at: :desc).page(params[:page])
       @tags = Tag.all
       
       render :index

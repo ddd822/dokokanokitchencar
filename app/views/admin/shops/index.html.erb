@@ -42,6 +42,7 @@
             <td><%= link_to "詳細", admin_shop_path(shop), class: "btn btn-outline-primary" %></td>
           </tr>
         <% end %>
+        <%= paginate @shops %>
       </tbody>
     </table>
   </div>

@@ -4,7 +4,7 @@ class Admin::CustomersController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @customers = Customer.all
+    @customers = Customer.page(params[:page])
   end
 
   def search
@@ -20,7 +20,7 @@ class Admin::CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
-    @posts = @customer.posts.order(created_at: :desc)
+    @posts = @customer.posts.order(created_at: :desc).page(params[:page])
   end
 
   def destroy

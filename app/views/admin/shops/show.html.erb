@@ -58,11 +58,13 @@
               <td><%= link_to "詳細", admin_post_path(post), class: "btn btn-outline-primary" %></td>
             </tr>
           <% end %>
+          
         </tbody>
       </table>
     <% else %>
       <p>まだ投稿がありません。</p>
     <% end %>
+    <%= paginate @posts %>
   </div>
   <div class="my-2">
   <%= link_to '店舗ユーザー一覧へ戻る', admin_shops_path %>

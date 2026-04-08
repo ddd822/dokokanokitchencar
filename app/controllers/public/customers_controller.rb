@@ -4,8 +4,8 @@ class Public::CustomersController < ApplicationController
   before_action :authorize_customer!, only: [:show, :edit, :update, :destroy]
 
   def show
-    @posts = @customer.posts.order(created_at: :desc)
-    @comments = @customer.comments.includes(:commentable).order(created_at: :desc)
+    @posts = @customer.posts.order(created_at: :desc).page(params[:page])
+    @comments = @customer.comments.includes(:commentable).order(created_at: :desc).page(params[:page])
   end
   
   def edit
