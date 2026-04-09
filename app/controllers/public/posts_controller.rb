@@ -17,7 +17,7 @@ class Public::PostsController < ApplicationController
       @post.tags = find_or_create_tags(post_params[:tag_names])
       redirect_to @post, notice: "投稿が作成されました"
     else
-      render :new, alert: "ログイン"
+      render :new, alert: "ログインしてください"
     end
   end
   

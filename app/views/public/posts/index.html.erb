@@ -2,12 +2,12 @@
   <div class='col-6 mx-auto'>
     <h2>投稿一覧</h2>
     <% if @keyword.present? %>
-      <h3>「<%= @keyword %>」の検索結果: <%= @posts.count %>件</h3>
+      <h4>「<%= @keyword %>」の検索結果: <%= @posts.count %>件</h4>
     <% end %>
 
     <% if @tag_id.present? %>
       <% selected_tag = @tags.find { |t| t.id == @tag_id.to_i } %>
-      <p>タグ絞り込み: <%= selected_tag&.name || '不明なタグ' %></p>
+      <h4>タグ絞り込み: <%= selected_tag&.name || '不明なタグ' %></h4>
     <% end %>
 
     <% @posts.each do |post| %>
@@ -22,6 +22,12 @@
           不明
         <% end %>
       </p>
+      <p><small>
+        タグ:
+        <% post.tags.each do |tag| %>
+          <%= link_to tag.name, search_posts_path(tag_id: tag.id), class: "badge badge-primary mr-1" %>
+        <% end %>
+      </small></p>
       <p><small>投稿日: <%= post.created_at.strftime("%Y/%m/%d %H:%M") %> ｜ コメント（<%= post.comments.count %>件）</small></p>
       <p class="card-title">
         <span><i class="fa-solid fa-location-dot"></i> <%= post.address %></span>
