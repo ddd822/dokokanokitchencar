@@ -1,5 +1,5 @@
 <div class="row">
-  <div class='col-md-4'>
+  <div class='col-md-4 my-3'>
     <h2>プロフィール</h2>
       <table class='table'>
       <tr>
@@ -20,8 +20,8 @@
       </div>
     <% end %>
   </div>
-  <div class='col-md-4'>  
-    <h2>あなたの投稿一覧</h2>
+  <div class='col-md-4 my-3'>  
+    <h3><%= @customer.name %>の投稿一覧</h3>
     <% if @posts.any? %>
       <ul>
         <% @posts.each do |post| %>
@@ -37,8 +37,8 @@
     <% end %>
     <%= paginate @posts %>
   </div>
-  <div class='col-md-4'>  
-    <h2>あなたのコメント一覧</h2>
+  <div class='col-md-4 my-3'>  
+    <h3><%= @customer.name %>のコメント一覧</h3>
     <% if @comments.any? %>
       <ul>
         <% @comments.each do |comment| %>

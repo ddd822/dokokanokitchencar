@@ -1,6 +1,7 @@
 <div class="row">
   <div class='col-6 mx-auto'>
     <h2>投稿一覧</h2>
+    <hr>
     <% if @keyword.present? %>
       <h4>「<%= @keyword %>」の検索結果: <%= @posts.count %>件</h4>
     <% end %>

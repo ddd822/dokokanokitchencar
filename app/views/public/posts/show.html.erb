@@ -38,8 +38,8 @@
     <% @post.comments.each do |comment| %>
       <div>
         <p><%= simple_format(comment.body) %></p>
-        <small>(ユーザー名: <%= comment.user.name %>)</small><br>
-        <small>(コメント日時: <%= comment.created_at.strftime("%Y/%m/%d %H:%M") %>)</small><br>
+        <small>ユーザー名: <%= comment.user.name %></small> | 
+        <small><%= comment.created_at.strftime("%Y/%m/%d %H:%M") %></small><br>
         <% if comment.user == current_shop || comment.user == current_customer %>
           <%= link_to 'コメント削除', post_comment_path(@post, comment), method: :delete, data: { confirm: '削除しますか？' }, class: "btn btn-sm btn-outline-danger" %>
         <% end %>
@@ -60,7 +60,9 @@
     <% else %>
       <p>コメントするにはログインしてください。</p>
     <% end %>
-
-    <%= link_to '投稿一覧へ戻る', posts_path %>
+    <div class="my-4">
+      <%= link_to '投稿一覧へ戻る', posts_path %>
+    </div>
   </div>
 </div>
+

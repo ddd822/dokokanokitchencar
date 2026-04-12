@@ -1,5 +1,5 @@
 <div class="row">
-  <div class='col-md-4'>
+  <div class='col-md-4 my-3'>
     <h2>プロフィール</h2>
       <table class='table'>
       <tr>
@@ -38,8 +38,9 @@
       </div>
     <% end %>
   </div>
-  <div class='col-md-4'>
-    <h2>あなたの投稿一覧</h2>
+  
+  <div class='col-md-4 my-3'>
+    <h3><%= @shop.name %>の投稿一覧</h3>
     <% if @posts.any? %>
       <ul>
         <% @posts.each do |post| %>
@@ -54,28 +55,31 @@
     <% end %>
     <%= paginate @posts %>
   </div>
-  <div class='col-md-4'>  
-    <h2>あなたのコメント一覧</h2>
-    <% if @comments.any? %>
-      <ul>
-        <% @comments.each do |comment| %>
-          <div class='mb-2'>
-            <li>
-              <%= simple_format(comment.body) %>
-              <small>(コメント日時: <%= comment.created_at.strftime("%Y/%m/%d %H:%M") %>)</small><br>
-              <small>(対象投稿タイトル:
-              <% if comment.commentable.present? %>
-                <%= link_to comment.commentable.title, post_path(comment.commentable) %>)
-              <% else %>
-                (投稿が削除されています)
-              <% end %></small>
-            </li>
-          </div>
-        <% end %>
-        <%= paginate @comments %>
-      </ul>
-    <% else %>
-      <p>コメントはまだありません。</p>
-    <% end %>
-  </div>
+
+    <% if shop_signed_in? && @shop == current_shop %>
+    <div class='col-md-4 my-3'>  
+      <h3><%= @shop.name %>のコメント一覧</h3>
+      <% if @comments.any? %>
+        <ul>
+          <% @comments.each do |comment| %>
+            <div class='mb-2'>
+              <li>
+                <%= simple_format(comment.body) %>
+                <small>(コメント日時: <%= comment.created_at.strftime("%Y/%m/%d %H:%M") %>)</small><br>
+                <small>(対象投稿タイトル:
+                <% if comment.commentable.present? %>
+                  <%= link_to comment.commentable.title, post_path(comment.commentable) %>)
+                <% else %>
+                  (投稿が削除されています)
+                <% end %></small>
+              </li>
+            </div>
+          <% end %>
+          <%= paginate @comments %>
+        </ul>
+      <% else %>
+        <p>コメントはまだありません。</p>
+      <% end %>
+    </div>
+  <% end %>
 </div>

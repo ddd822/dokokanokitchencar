@@ -1,7 +1,7 @@
 class Public::ShopsController < ApplicationController
-  before_action :authenticate_shop!
+  before_action :authenticate_shop!, except: [:show]
   before_action :set_shop, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_shop!, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_shop!, only: [:edit, :update, :destroy]
 
   def show
     @posts = @shop.posts.order(created_at: :desc).page(params[:page])
@@ -43,7 +43,7 @@ class Public::ShopsController < ApplicationController
 
   def authorize_shop!
     unless @shop == current_shop
-      redirect_to shop_path(current_shop), alert: "権限がありません。"
+      redirect_to root_path, alert: "権限がありません。"
     end
   end
 
