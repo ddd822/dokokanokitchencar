@@ -6,8 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Admin.find_or_create_by!(email: "admin@gmail.com") do |admin|
-  admin.password = "123456"
+Admin.find_or_create_by!(email: ENV['ADMIN_EMAIL']) do |admin|
+  admin.password = ENV['ADMIN_PASSWORD']
 end
 
 weekdays = %w(日曜日 月曜日 火曜日 水曜日 木曜日 金曜日 土曜日)

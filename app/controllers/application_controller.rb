@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_tags_for_search
-    @tags = Tag.all.order(:name)
+    @tags = Tag.joins(:posts).distinct.order(:name)
   end
 
   def choose_layout
