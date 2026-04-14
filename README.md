@@ -19,14 +19,11 @@
 - ​自分が経営するキッチンカーを宣伝したい時
 
 ## 設計書
-後ほど作成予定
 ​
 ## 開発環境
-- OS：Windows
+- OS：Linux(Ubuntu 24.04)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
 - IDE：Visual Studio Code（VSCode）
-
-## 使用素材
 ​
