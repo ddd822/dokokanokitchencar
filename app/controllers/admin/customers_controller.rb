@@ -21,6 +21,7 @@ class Admin::CustomersController < ApplicationController
   def show
     @customer = Customer.find(params[:id])
     @posts = @customer.posts.order(created_at: :desc).page(params[:page])
+    @comments = @customer.comments.includes(:commentable).order(created_at: :desc).page(params[:page])
   end
 
   def destroy

@@ -21,6 +21,7 @@ class Admin::ShopsController < ApplicationController
   def show
     @shop = Shop.find(params[:id])
     @posts = @shop.posts.order(created_at: :desc).page(params[:page])
+    @comments = @shop.comments.includes(:commentable).order(created_at: :desc).page(params[:page])
   end
 
   def destroy

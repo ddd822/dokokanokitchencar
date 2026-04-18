@@ -1,6 +1,6 @@
 <div class="row mt-3">
   <div class="col-3">
-    <h3>一般ユーザー詳細</h3>
+    <h3>一般会員詳細</h3>
     <table class="table">
       <tbody>
         <tr>
@@ -19,34 +19,45 @@
     </table>
     <%= link_to "削除", admin_customer_path(@customer), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-outline-danger btn-block" %>
   </div>
-  <div class="col-8 offset-1">
-    <h3><%= @customer.name %>の投稿一覧</h3>
+  <div class='col-md-4 my-3'>  
+    <h3><%= @customer.name %><br>の投稿一覧</h3>
     <% if @posts.any? %>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>id</th>
-            <th>title</th>
-            <th>body</th>
-            <th></th>
-          </tr>
-        </head>
-        <tbody>
-          <% @posts.each do |post| %>
-            <tr>
-              <td><%= link_to post.id, admin_post_path(post) %></td>
-              <td><%= post.title %></td>
-              <td><%= post.body %></td>
-              <td><%= link_to "詳細", admin_post_path(post), class: "btn btn-outline-primary" %></td>
-            </tr>
-          <% end %>
-          
-        </tbody>
-      </table>
+      <ul>
+        <% @posts.each do |post| %>
+          <li>
+            <%= link_to post.title, admin_post_path(post) %> 
+            <small>(投稿日: <%= post.created_at.strftime("%Y/%m/%d") %>)</small>
+          </li>
+        <% end %>        
+      </ul>
     <% else %>
       <p>まだ投稿がありません。</p>
     <% end %>
     <%= paginate @posts %>
+  </div>
+  <div class='col-md-4 my-3'>  
+    <h3><%= @customer.name %><br>のコメント一覧</h3>
+    <% if @comments.any? %>
+      <ul>
+        <% @comments.each do |comment| %>
+          <div class='mb-2'>
+            <li>
+              <%= simple_format(comment.body) %>
+              <small>(コメント日時: <%= comment.created_at.strftime("%Y/%m/%d %H:%M") %>)</small><br>
+              <small>(対象投稿タイトル:
+              <% if comment.commentable.present? %>
+                <%= link_to comment.commentable.title, admin_post_path(comment.commentable) %>)
+              <% else %>
+                (投稿が削除されています)
+              <% end %></small>
+            </li>
+          </div>
+        <% end %>
+        <%= paginate @comments %>      
+      </ul>
+    <% else %>
+      <p>コメントはまだありません。</p>
+    <% end %>
   </div>
   <div class="my-2">
   <%= link_to '一般ユーザー一覧へ戻る', admin_customers_path %>
