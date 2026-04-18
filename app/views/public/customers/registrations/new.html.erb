@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-6 mx-auto">
-    <h2 class="text-center my-4">一般会員新規登録</h2>
+    <h2 class="rounded-pill bg-warning text-center my-4">一般会員新規登録</h2>
 
     <%= form_with model: @customer, url: customer_registration_path do |f| %>
       <%= render 'layouts/error_messages', model: f.object %>

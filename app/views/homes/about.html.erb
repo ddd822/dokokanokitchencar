@@ -1,8 +1,16 @@
 <div class="row">
-  <div class="md-3">
-    <h2>どこかのキッチンカーとは</h2>
-    <p>
-      好きなキッチンカーを紹介したり、どこにどんなキッチンカーが出店しているか検索できるコミュニティサイトです。
-    </p>
+  <div class="md-3 my-5 mx-auto text-center">
+    <h2>どこかのキッチンカー<i class="fa-solid fa-truck"></i>とは</h2>
+    <p>好きなキッチンカーを紹介したり、どこにどんなキッチンカーが出店しているか検索できるコミュニティサイトです。</p>
+    <hr class="border border-danger opacity-50">
+  </div>
+  <div class="md-3 mx-auto text-center">
+    <h3><i class="fa-solid fa-utensils"></i>こんな人におすすめ<i class="fa-solid fa-utensils"></i></h3>
+    <h5 class="my-3">近くで飲食店を探していて、いつもと違う食事をしたい人</h5>
+    <p>⇒<%= link_to '投稿一覧', posts_path %>から気になる投稿を探してみよう</p>
+    <h5 class="mt-5">好きなキッチンカーを誰かに紹介したい人</h5>
+    <p>⇒<%= link_to '一般会員登録', new_customer_registration_path %>をして投稿をしてみよう</p>
+    <h5 class="mt-5">キッチンカーを経営していて宣伝をしたい人​</h5>
+    <p>⇒<%= link_to '店舗会員登録', new_shop_registration_path %>をして投稿をしてみよう</p>
   </div>
 </div>

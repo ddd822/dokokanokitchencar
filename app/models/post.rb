@@ -12,6 +12,7 @@ class Post < ApplicationRecord
   geocoded_by :address
   after_validation :geocode
 
+  after_create :reload_tags
   after_update :reload_tags
 
   private 
@@ -28,6 +29,8 @@ class Post < ApplicationRecord
       self.tags = post_tag_params.split(',').map(&:strip).uniq.map do |name|
         Tag.find_or_create_by(name: name)
       end
+    else
+      self.tags = []
     end
   end
 end

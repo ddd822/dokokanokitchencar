@@ -1,5 +1,5 @@
 <div class='row'>
-  <div class="col-md-6 mx-auto">
+  <div class="col-md-6 mx-auto my-3">
     <h2>投稿の編集</h2>
     <%= form_with model: @post do |f| %>
       <%= render 'layouts/error_messages', model: f.object, resource: @post %>
@@ -12,8 +12,8 @@
         <%= f.text_area :body, class: 'form-control', rows: 5  %>
       </div>
       <div>
-        <%= f.label :tag_names, "タグ（カンマ区切り）" %><br>
-        <%= f.text_field :tag_names, value: @post.tags.pluck(:name).join(", "), placeholder: "例：Ruby, Rails, Web" %>
+        <%= f.label :post_tag_params, "タグ（カンマ区切り）" %><br>
+        <%= f.text_field :post_tag_params, value: @post.tags.pluck(:name).join(", "), placeholder: "例：クレープ,駅前,人気" %>
       </div>
       <div class="my-2">
         <%= f.submit '更新する', class: 'btn btn-success' %>

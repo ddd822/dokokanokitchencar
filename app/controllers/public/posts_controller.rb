@@ -10,11 +10,10 @@ class Public::PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params.except(:tag_names))
+    @post = Post.new(post_params.except(:post_tag_params))
+    @post.post_tag_params = post_params[:post_tag_params]
     @post.postable = current_shop || current_customer
-
     if @post.save
-      @post.tags = find_or_create_tags(post_params[:tag_names])
       redirect_to @post, notice: "投稿が作成されました"
     else
       render :new, alert: "ログインしてください"
@@ -54,8 +53,8 @@ class Public::PostsController < ApplicationController
   end
 
   def update
-    @post.post_tag_params = post_params[:tag_names]
-    if @post.update(post_params.except(:tag_names))
+    @post.post_tag_params = post_params[:post_tag_params]
+    if @post.update(post_params.except(:post_tag_params))
       redirect_to post_path(@post), notice: "投稿を更新しました。"
     else
       render :edit
@@ -76,7 +75,7 @@ class Public::PostsController < ApplicationController
 
 
   def post_params
-    params.require(:post).permit(:title, :body, :address, :tag_names)
+    params.require(:post).permit(:title, :body, :address, :post_tag_params)
   end
 
   def set_post

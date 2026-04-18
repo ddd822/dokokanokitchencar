@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-6 mx-auto">
+  <div class="col-md-6 mx-auto my-3">
     <h2>店舗プロフィール編集</h2>
   <%= form_with model: @shop do |f| %>
     <%= render 'layouts/error_messages', model: f.object %>
@@ -16,7 +16,7 @@
 
     <div class="mb-2">
       <%= f.label :telephone_number, "電話番号（ハイフンなし）" %><br>
-      <%= f.text_field :telephone_number, placeholder: "00000000000", class: "form-control" %>
+      <%= f.text_field :telephone_number, placeholder: "00000000000", maxlength: 11, class: "form-control" %>
     </div>
 
     <div class="mb-2">
@@ -31,7 +31,7 @@
 
     <div class="mb-2">
       <%= f.label :introduction, "店舗紹介" %><br>
-      <%= f.text_area :introduction, class: "form-control", rows: 3, placeholder: "店舗紹介を入力できます（300字以内）", class: "form-control" %>
+      <%= f.text_area :introduction, class: "form-control", rows: 3, placeholder: "店舗紹介を入力できます（300字以内）", maxlength: 300, class: "form-control" %>
     </div>
 
     <!--<div class="mb-2">

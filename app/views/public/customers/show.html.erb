@@ -21,7 +21,7 @@
     <% end %>
   </div>
   <div class='col-md-4 my-3'>  
-    <h3><%= @customer.name %>の投稿一覧</h3>
+    <h3><%= @customer.name %><br>の投稿一覧</h3>
     <% if @posts.any? %>
       <ul>
         <% @posts.each do |post| %>
@@ -38,7 +38,7 @@
     <%= paginate @posts %>
   </div>
   <div class='col-md-4 my-3'>  
-    <h3><%= @customer.name %>のコメント一覧</h3>
+    <h3><%= @customer.name %><br>のコメント一覧</h3>
     <% if @comments.any? %>
       <ul>
         <% @comments.each do |comment| %>
