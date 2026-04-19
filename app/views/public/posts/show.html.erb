@@ -21,6 +21,8 @@
       <% end %>
     </small></p>
     <p><small>投稿日：<%= @post.created_at.strftime("%Y/%m/%d %H:%M") %></small></p>
+
+    
     <p>
       タグ:
       <% @post.tags.each do |tag| %>

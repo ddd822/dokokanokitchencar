@@ -15,6 +15,16 @@
         <%= f.label :post_tag_params, "タグ（カンマ区切り）" %><br>
         <%= f.text_field :post_tag_params, value: @post.tags.pluck(:name).join(", "), placeholder: "例：クレープ,駅前,人気" %>
       </div>
+
+      <div class="input-group mb-3 mt-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text" aria-hidden="true"><i class="fa-solid fa-location-dot"></i></span>
+        </div>
+        <%= f.text_field :address, class: "form-control", placeholder: "住所" %>
+      </div>
+      <div id="map" data-lat="<%= @post.latitude %>" data-lng="<%= @post.longitude %>"></div>
+    <%= javascript_pack_tag 'map', 'data-turbolinks-track': 'reload' %>
+
       <div class="my-2">
         <%= f.submit '更新する', class: 'btn btn-success' %>
       </div>
