@@ -14,7 +14,7 @@
     <p class="my-1"><small>
       <% if @post.postable_type == "Shop" %>
         店舗名：<%= link_to @post.postable.name, shop_path(@post.postable) %>
-      <% elsif post.postable_type == "Customer" %>
+      <% elsif @post.postable_type == "Customer" %>
         ユーザーネーム：<%= @post.postable.name %>
       <% else %>
         不明
